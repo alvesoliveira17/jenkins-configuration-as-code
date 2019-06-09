@@ -1,0 +1,14 @@
+version: "2"
+services:
+  jenkins:
+    image: jenkins-config-as-code:v1.0
+    build:
+      context: .
+    environment:
+     - JAVA_OPTS="-Djenkins.install.runSetupWizard=false -Dpermissive-script-security.enabled=no_security"
+     - CASC_JENKINS_CONFIG=/opt/jasc
+    ports:
+     - 80:8080
+    volumes:
+     - "${PWD}/data:/var/jenkins_home"
+     - "/var/run/docker.sock:/var/run/docker.sock"

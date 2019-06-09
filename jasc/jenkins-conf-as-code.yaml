@@ -1,0 +1,65 @@
+jenkins:
+  authorizationStrategy: 
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "0msxu5QxN5UbIIJb"
+security:
+  globalJobDslSecurityConfiguration:
+    useScriptSecurity: false
+unclassified:          
+  globalLibraries:
+    libraries:
+      - name: "rivendel-shared-libraries"
+        defaultVersion: "master"
+        implicit: true
+        retriever:
+          modernSCM:
+            scm:
+              git:
+                remote: "https://github.com/alvesoliveira17/pipeline-libraries.git"
+
+  simple-theme-plugin:
+    elements:
+    - cssUrl:
+        url: "https://s3.amazonaws.com/opengalaxy-jenkins/jenkins-material-theme.css"
+    - faviconUrl:
+        url: "https://s3.amazonaws.com/opengalaxy-jenkins/semantix_favicon.png"
+  location:
+    adminAddress: "luiz.oliveira@rivendel.com.br"
+    url: "http://jenkins.poc.rivendel.com.br/jenkins"
+jobs:
+  - script: >
+      folder('shared-libraries')
+  - script: >
+      pipelineJob('shared-libraries/docker-run') {
+        parameters {
+                stringParam('IMAGE', 'nginxdemos/hello:0.2', 'Docker image name')
+                stringParam('HOST_PORT', '8080', 'Docker-engine host port')
+                stringParam('CONTAINER_PORT', '80', 'Docker container port')
+          }
+        definition {
+          cps {
+            script("""\
+              pipeline {
+                agent any
+                stages {
+                  stage ('Deploy docker container') {
+                    steps {
+                      dockerRun(
+                        hostPort : HOST_PORT,
+                        containerPort : CONTAINER_PORT,
+                        image : IMAGE
+                      )
+                    }
+                  }
+                }
+              }""".stripIndent())
+          }
+        }
+      }
+    
