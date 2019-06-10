@@ -22,23 +22,22 @@ Toda configuração do Jenkins é definida no arquivo "jenkins-conf-as-code.yaml
 
 ## Estrutura de diretório
 
-.
-├── docker-compose.yml (Manifesto do docker-compose para a stack)
-├── Dockerfile (Dockerfile do Jenkins)
-├── files
-│   ├── check.sh
-│   ├── disable-script-security.groovy
-│   └── jenkins.sh
-├── jasc
-│   └── jenkins-conf-as-code.yaml (Arquivo de configuração do Jenkins)
-├── jjb
-│   ├── Dockerfile (Dockerfile do Jenkins-Job-Builder)
-│   └── jobs (Estrutura de jobs)
-│       ├── docker-rm.yml 
-│       └── docker-run.yml
-├── plugins.txt (Lista de plugins do Jenkins)
-└── README.md
-
+.</br>
+├── docker-compose.yml (Manifesto do docker-compose para a stack)</br>
+├── Dockerfile (Dockerfile do Jenkins)</br>
+├── files</br>
+│   ├── check.sh</br>
+│   ├── disable-script-security.groovy</br>
+│   └── jenkins.sh</br>
+├── jasc</br>
+│   └── jenkins-conf-as-code.yaml (Arquivo de configuração do Jenkins)</br>
+├── jjb</br>
+│   ├── Dockerfile (Dockerfile do Jenkins-Job-Builder)</br>
+│   └── jobs (Estrutura de jobs)</br>
+│       ├── docker-rm.yml</br>
+│       └── docker-run.yml</br>
+├── plugins.txt (Lista de plugins do Jenkins)</br>
+└── README.md</br>
 
 
 ## Documentação do Plugin
