@@ -7,10 +7,7 @@ jenkins:
       allowsSignup: false
       users:
         - id: "admin"
-          password: "kEnwue03K"
-security:
-  globalJobDslSecurityConfiguration:
-    useScriptSecurity: false
+          password: ${JENKINS_PWD}
 unclassified:          
   globalLibraries:
     libraries:
@@ -32,60 +29,4 @@ unclassified:
   location:
     adminAddress: "luiz.oliveira@rivendel.com.br"
     url: "http://jenkins.poc.rivendel.com.br/jenkins"
-jobs:
-  - script: >
-      folder('shared-libraries')
-  - script: >
-      pipelineJob('shared-libraries/docker-run') {
-        parameters {
-                stringParam('IMAGE', 'nginxdemos/hello:0.2', 'Docker image name')
-                stringParam('HOST_PORT', '8080', 'Docker-engine host port')
-                stringParam('CONTAINER_PORT', '80', 'Docker container port')
-                stringParam('CONTAINER_NAME', 'nginx-helloworld', 'Docker container name')
-          }
-        definition {
-          cps {
-            script("""\
-              pipeline {
-                agent any
-                stages {
-                  stage ('Deploy docker container') {
-                    steps {
-                      dockerRun(
-                        hostPort : HOST_PORT,
-                        containerPort : CONTAINER_PORT,
-                        image : IMAGE
-                        containerName : CONTAINER_NAME
-                      )
-                    }
-                  }
-                }
-              }""".stripIndent())
-          }
-        }
-      }
-
-  - script: >
-      pipelineJob('shared-libraries/docker-rm') {
-        parameters {
-                stringParam('CONTAINER_NAME', 'nginx-helloworld', 'Docker container name')
-          }
-        definition {
-          cps {
-            script("""\
-              pipeline {
-                agent any
-                stages {
-                  stage ('Deploy remove container') {
-                    steps {
-                      dockerRm(
-                        containerName : CONTAINER_NAME
-                      )
-                    }
-                  }
-                }
-              }""".stripIndent())
-          }
-        }
-      }
     

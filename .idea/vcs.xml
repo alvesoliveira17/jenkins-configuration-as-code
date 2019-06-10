@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/data/workspace/docker-rm@libs/rivendel-shared-libraries" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/data/workspace/docker-run@libs/rivendel-shared-libraries" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/data/workspace/shared-libraries/docker-rm@libs/rivendel-shared-libraries" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/data/workspace/shared-libraries/docker-run@libs/rivendel-shared-libraries" vcs="Git" />
+  </component>
+</project>

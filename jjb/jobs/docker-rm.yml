@@ -1,0 +1,21 @@
+- job:
+    name: docker-rm
+    project-type: pipeline
+    node: 
+    parameters:
+      - string:
+          name: CONTAINER_NAME
+          default: 'nginx-helloworld'          
+    dsl: |
+      pipeline {
+        agent any
+        stages {
+          stage ('Remove docker container') {
+            steps {
+              dockerRm(
+                containerName : CONTAINER_NAME
+              )
+            }
+          }
+        }
+      }

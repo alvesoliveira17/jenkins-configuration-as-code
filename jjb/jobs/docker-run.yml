@@ -1,0 +1,33 @@
+- job:
+    name: docker-run
+    project-type: pipeline
+    node: 
+    parameters:
+      - string:
+          name: IMAGE
+          default: 'nginxdemos/hello:0.2'    
+      - string:
+          name: HOST_PORT
+          default: '8080'
+      - string:
+          name: CONTAINER_PORT
+          default: '80'          
+      - string:
+          name: CONTAINER_NAME
+          default: 'nginx-helloworld'          
+    dsl: |
+      pipeline {
+        agent any
+        stages {
+          stage ('Deploy docker container') {
+            steps {
+              dockerRun(
+                hostPort : HOST_PORT,
+                containerPort : CONTAINER_PORT,
+                image : IMAGE,
+                containerName : CONTAINER_NAME
+              )
+            }
+          }
+        }
+      }
