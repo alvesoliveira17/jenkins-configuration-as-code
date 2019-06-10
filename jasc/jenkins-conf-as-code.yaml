@@ -7,7 +7,7 @@ jenkins:
       allowsSignup: false
       users:
         - id: "admin"
-          password: "0msxu5QxN5UbIIJb"
+          password: "kEnwue03K"
 security:
   globalJobDslSecurityConfiguration:
     useScriptSecurity: false
@@ -41,6 +41,7 @@ jobs:
                 stringParam('IMAGE', 'nginxdemos/hello:0.2', 'Docker image name')
                 stringParam('HOST_PORT', '8080', 'Docker-engine host port')
                 stringParam('CONTAINER_PORT', '80', 'Docker container port')
+                stringParam('CONTAINER_NAME', 'nginx-helloworld', 'Docker container name')
           }
         definition {
           cps {
@@ -54,6 +55,31 @@ jobs:
                         hostPort : HOST_PORT,
                         containerPort : CONTAINER_PORT,
                         image : IMAGE
+                        containerName : CONTAINER_NAME
+                      )
+                    }
+                  }
+                }
+              }""".stripIndent())
+          }
+        }
+      }
+
+  - script: >
+      pipelineJob('shared-libraries/docker-rm') {
+        parameters {
+                stringParam('CONTAINER_NAME', 'nginx-helloworld', 'Docker container name')
+          }
+        definition {
+          cps {
+            script("""\
+              pipeline {
+                agent any
+                stages {
+                  stage ('Deploy remove container') {
+                    steps {
+                      dockerRm(
+                        containerName : CONTAINER_NAME
                       )
                     }
                   }
