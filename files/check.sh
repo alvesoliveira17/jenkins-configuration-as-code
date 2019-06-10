@@ -1,4 +1,4 @@
-STATUSCODE=$(curl -sL -w "%{http_code}" jenkins.poc.rivendel.com.br/login -o /dev/null)
+STATUSCODE=$(curl -sL -w "%{http_code}" ${JENKINS_URL}/login -o /dev/null)
 
 if test $STATUSCODE -eq 200; then
     echo "Jenkins service is running."

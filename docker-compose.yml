@@ -6,11 +6,12 @@ services:
       context: .
     environment:
      - JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
-     - JENKINS_OPTS="-Dpermissive-script-security.enabled=true"
      - CASC_JENKINS_CONFIG=/opt/jasc
+     - JENKINS_USER=${JENKINS_USER}
      - JENKINS_PWD=${JENKINS_PWD}
+     - JENKINS_URL=${JENKINS_URL}
     extra_hosts:
-      - jenkins.poc.rivendel.com.br:${LOCAL_IP_ADDR}
+      - ${JENKINS_URL}:${LOCAL_IP_ADDR}
     healthcheck:
       test: ["CMD-SHELL", "check.sh"]
       interval: 10s
@@ -36,7 +37,7 @@ services:
       jenkins:
         condition: service_healthy
     extra_hosts:
-      - jenkins.poc.rivendel.com.br:${LOCAL_IP_ADDR}
+      - ${JENKINS_URL}:${LOCAL_IP_ADDR}
     restart: on-failure
     volumes:
       - ${PWD}/jjb/jobs:/opt/jenkins-job-builder/jobs

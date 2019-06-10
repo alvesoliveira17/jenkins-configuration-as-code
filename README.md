@@ -1,6 +1,6 @@
 # Jenkins Configuration as Code
 
-Este projeto contém os arquivos necessários para executar o Jenkins e sua configuração de forma automática, através do plugin "jenkins-configuration-as-code" e a criação de jobs através do "Jenkins Job Builder".
+Este projeto contém os arquivos necessários para executar o Jenkins e sua configuração como código, através do plugin "jenkins-configuration-as-code" e a criação de jobs através do "Jenkins Job Builder".
 
 
 # Execução
@@ -11,14 +11,35 @@ Para executá-lo, basta seguir os comandos abaixo:
 
     $ mkdir data && chown 1000:1000 data
     $ LOCAL_IP_ADDR=YOUR_LOCAL_IP \
-      JENKINS_USER=admin \
+      JENKINS_USER=YOUR_USER \
       JENKINS_PWD=YOUR_PASSWORD \
-      JENKINS_URL=http://jenkins.poc.rivendel.com.br \
+      JENKINS_URL=YOUR_DOMAIN \
       docker-compose up -d
 
 ## Configuração
 
 Toda configuração do Jenkins é definida no arquivo "jenkins-conf-as-code.yaml", encontrado no diretório **jasc** deste projeto.
+
+## Estrutura de diretório
+
+.
+├── docker-compose.yml (Manifesto do docker-compose para a stack)
+├── Dockerfile (Dockerfile do Jenkins)
+├── files
+│   ├── check.sh
+│   ├── disable-script-security.groovy
+│   └── jenkins.sh
+├── jasc
+│   └── jenkins-conf-as-code.yaml (Arquivo de configuração do Jenkins)
+├── jjb
+│   ├── Dockerfile (Dockerfile do Jenkins-Job-Builder)
+│   └── jobs (Estrutura de jobs)
+│       ├── docker-rm.yml 
+│       └── docker-run.yml
+├── plugins.txt (Lista de plugins do Jenkins)
+└── README.md
+
+
 
 ## Documentação do Plugin
 

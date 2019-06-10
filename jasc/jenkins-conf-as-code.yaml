@@ -28,5 +28,5 @@ unclassified:
         url: "https://s3.amazonaws.com/opengalaxy-jenkins/semantix_favicon.png"
   location:
     adminAddress: "luiz.oliveira@rivendel.com.br"
-    url: "http://jenkins.poc.rivendel.com.br/jenkins"
+    url: http://${JENKINS_URL}
     

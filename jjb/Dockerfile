@@ -15,7 +15,7 @@ allow_duplicates=True\n\
 [jenkins]\n\
 user=$JENKINS_USER\n\
 password=$JENKINS_PWD\n\
-url=$JENKINS_URL\n"\
+url=http://$JENKINS_URL\n"\
 >> /etc/jenkins_jobs/jenkins_jobs.ini
 
 WORKDIR /opt/jenkins-job-builder
