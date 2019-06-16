@@ -12,7 +12,9 @@ RUN install-plugins.sh < $JENKINS_HOME/plugins.txt
 
 USER root
 
+ARG DOCKER_GROUP_ID
 RUN curl https://get.docker.com | sh \
+    && groupmod -g ${DOCKER_GROUP_ID} docker \
     && usermod -aG docker jenkins \
     && chmod +x /usr/local/bin/jenkins.sh /usr/local/bin/check.sh
 

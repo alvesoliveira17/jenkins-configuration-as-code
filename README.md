@@ -14,6 +14,7 @@ Para executá-lo, basta seguir os comandos abaixo:
       JENKINS_USER=YOUR_USER \
       JENKINS_PWD=YOUR_PASSWORD \
       JENKINS_URL=YOUR_DOMAIN \
+      DOCKER_GROUP_ID=$(getent group docker | awk -F ":" '{ print $3}') \
       docker-compose up -d
 
 ## Configuração

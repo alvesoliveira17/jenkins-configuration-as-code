@@ -4,6 +4,8 @@ services:
     image: jenkins-config-as-code:v1.0
     build:
       context: .
+      args:
+        - DOCKER_GROUP_ID=${DOCKER_GROUP_ID}
     environment:
      - JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
      - CASC_JENKINS_CONFIG=/opt/jasc
