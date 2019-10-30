@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.174
+FROM jenkins/jenkins:latest
 
 ARG JENKINS_HOME=/var/jenkins_home
 ENV JENKINS_HOME $JENKINS_HOME

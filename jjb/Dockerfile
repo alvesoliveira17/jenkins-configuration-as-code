@@ -1,7 +1,7 @@
 FROM python:3
 
 WORKDIR /opt
-RUN git clone https://github.com/openstack-infra/jenkins-job-builder.git && \
+RUN git clone https://opendev.org/jjb/jenkins-job-builder.git && \
     cd /opt/jenkins-job-builder && \
     pip install -r test-requirements.txt -e . && \
     mkdir -p /etc/jenkins_jobs/
